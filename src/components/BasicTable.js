@@ -13,7 +13,8 @@ export const BasicTable = () => {
     getTableBodyProps, // get props for table body
     headerGroups,     // header groups
     rows,             // rows 
-    prepareRow        // function provided by library to restructure rows
+    prepareRow,       // function provided by library to restructure rows,
+    footerGroups      // to get footerGroups
   } = useTable({
     columns,
     data
@@ -43,6 +44,15 @@ export const BasicTable = () => {
             )
           })}
         </tbody>
+        <tfoot>
+          {footerGroups.map(footerGroup => (
+            <tr {...footerGroup.getFooterGroupProps()}>
+              {footerGroup.headers.map(column => (
+                <td {...column.getFooterProps()}>{column.render('Footer')}</td>
+              ))}
+            </tr>
+          ))}
+        </tfoot>
       </table>
     </>
   )
