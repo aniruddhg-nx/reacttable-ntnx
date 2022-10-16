@@ -1,20 +1,21 @@
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
 import MOCK_DATA from './MOCK_DATA.json'
-import { COLUMNS } from './columns'
+import { COLUMNS, GROUPED_COLUMNS } from './columns'
 import './table.css'
 
 export const BasicTable = () => {
-  const columns = useMemo(() => COLUMNS, [])
-  const data = useMemo(() => MOCK_DATA, [])
+  const columns = useMemo(() => COLUMNS, []);
+  // const columns = useMemo(() => GROUPED_COLUMNS, []);
+  const data = useMemo(() => MOCK_DATA, []);
 
   const {
-    getTableProps, // Get props for table
-    getTableBodyProps, // get props for table body
-    headerGroups,     // header groups
-    rows,             // rows 
-    prepareRow,       // function provided by library to restructure rows,
-    footerGroups      // to get footerGroups
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    footerGroups,
+    rows,
+    prepareRow
   } = useTable({
     columns,
     data
@@ -24,7 +25,7 @@ export const BasicTable = () => {
     <>
       <table {...getTableProps()}>
         <thead>
-          {headerGroups.map(headerGroup => (    //each column is a header group for now
+          {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
                 <th {...column.getHeaderProps()}>{column.render('Header')}</th>
